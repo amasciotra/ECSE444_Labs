@@ -27,10 +27,13 @@ Project File Date:  09/14/2018
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'C:\School Programs\Keil_v5\ARM\ARMCC\Bin'
 Build target 'GXX_Lab0'
-compiling main.c...
+compiling moving_avg.c...
+src\moving_avg.c(23): warning:  #1-D: last line of file ends without a newline
+  }
+src\moving_avg.c: 1 warning, 0 errors
 linking...
-Program Size: Code=3570 RO-data=1018 RW-data=20 ZI-data=4444  
-".\Objects\GXX_Lab0.axf" - 0 Error(s), 0 Warning(s).
+Program Size: Code=7784 RO-data=1212 RW-data=20 ZI-data=4444  
+".\Objects\GXX_Lab0.axf" - 0 Error(s), 1 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -59,16 +62,16 @@ Package Vendor: Keil
    * Component: ARM::CMSIS:CORE:5.1.2
 
    * Component: ARM::CMSIS:DSP:1.5.2
-      Include file:  CMSIS\DSP\Include\arm_math.h
       Library file:  CMSIS\Lib\ARM\arm_cortexM4lf_math.lib
+      Include file:  CMSIS\DSP\Include\arm_math.h
 
    * Component: ARM::Device:Startup:1.0.1
-      Source file:   Device\ARM\ARMCM4\Source\system_ARMCM4.c
       Source file:   Device\ARM\ARMCM4\Source\ARM\startup_ARMCM4.s
+      Source file:   Device\ARM\ARMCM4\Source\system_ARMCM4.c
 
    * Component: Keil.ARM Compiler::Compiler:I/O:STDOUT:ITM:1.2.0
       Source file:   Source\retarget_io.c
-Build Time Elapsed:  00:00:01
+Build Time Elapsed:  00:00:00
 </pre>
 </body>
 </html>
