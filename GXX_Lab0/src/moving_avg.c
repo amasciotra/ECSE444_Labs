@@ -18,6 +18,5 @@ void moving_avg(float *sig, float *sigf, int N, int D){
 			}
 		}
 		sigf[i] = tempsum /D;
-		//printf("%f\n", tempsum);
 	}
 }

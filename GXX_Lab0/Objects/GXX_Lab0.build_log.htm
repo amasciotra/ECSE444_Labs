@@ -28,9 +28,12 @@ Project File Date:  09/16/2018
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'C:\School Programs\Keil_v5\ARM\ARMCC\Bin'
 Build target 'GXX_Lab0'
 assembling mov_asm.s...
-asm\mov_asm.s(30): error: A1169E: Missing close square bracket
-asm\mov_asm.s(47): error: A1114E: Expected register relative expression
-".\Objects\GXX_Lab0.axf" - 2 Error(s), 0 Warning(s).
+asm\mov_asm.s(7): error: A1137E: Unexpected characters at end of line
+compiling moving_avg.c...
+src\moving_avg.c(22): warning:  #1-D: last line of file ends without a newline
+  }
+src\moving_avg.c: 1 warning, 0 errors
+".\Objects\GXX_Lab0.axf" - 1 Error(s), 1 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -63,8 +66,8 @@ Package Vendor: Keil
       Include file:  CMSIS\DSP\Include\arm_math.h
 
    * Component: ARM::Device:Startup:1.0.1
-      Source file:   Device\ARM\ARMCM4\Source\ARM\startup_ARMCM4.s
       Source file:   Device\ARM\ARMCM4\Source\system_ARMCM4.c
+      Source file:   Device\ARM\ARMCM4\Source\ARM\startup_ARMCM4.s
 
    * Component: Keil.ARM Compiler::Compiler:I/O:STDOUT:ITM:1.2.0
       Source file:   Source\retarget_io.c

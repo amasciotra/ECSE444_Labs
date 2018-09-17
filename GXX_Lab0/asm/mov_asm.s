@@ -4,7 +4,7 @@ mov_asm
 
 	PUSH{R4-R12}
 	MOV  R4,#0 
-	VMOV.f32 S3, R3
+	//VMOV.f32 S3, R3
 	
 	
 LOOP1
@@ -27,7 +27,7 @@ LOOP2
 	CMP R6, R2
 	BGT LOOP3
 	MOV R10, R6, LSL #2
-	VLDR S7, [R0{,R10}]  ; we want to left shift by 4 to get the next element in the array 
+	;VLDR S7, [R0{,R10}]  ; we want to left shift by 4 to get the next element in the array 
 	VDIV.f32 S7, S7, S3
 	VADD.f32 S5, S5, S7
 	ADDS R6, R6, #1
@@ -44,7 +44,7 @@ LOOP3
 	
 LOOP4
 	MOV R10, R4, LSL #2
-	VSTR.f32 S5, R1
+	;VSTR.f32 S5, R1
 	B LOOP1
 
 OVER
