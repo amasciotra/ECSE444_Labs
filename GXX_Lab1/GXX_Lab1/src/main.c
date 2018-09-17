@@ -29,8 +29,8 @@ float f1000_array[1000] = {47.68, 26.67, 64.09, 31.60, 25.83, 87.41, 67.60, 59.6
 	
 	
 float dotproduct(float *A, float *B, int N){
-		int i;
-		float answer;
+		int i = 0;
+		float answer = 0;
 	
 	for(i = 0; i < N; i++){
 		answer += (A[i] * B[i]);
@@ -39,8 +39,10 @@ float dotproduct(float *A, float *B, int N){
 }
 
 float findvar(float *A, int M){
-	int i;
-	float variance, mean, sum;
+	int i = 0;
+	float variance = 0;
+	float mean = 0;
+	float	sum = 0;
 		for (i = 0; i<N; i++){
 			mean += A[i];			
 		}
