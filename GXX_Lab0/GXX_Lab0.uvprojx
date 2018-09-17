@@ -396,6 +396,13 @@
         </Group>
         <Group>
           <GroupName>asm</GroupName>
+          <Files>
+            <File>
+              <FileName>mov_asm.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\asm\mov_asm.s</FilePath>
+            </File>
+          </Files>
         </Group>
         <Group>
           <GroupName>::CMSIS</GroupName>
