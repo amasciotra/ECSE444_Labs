@@ -2,6 +2,7 @@
 #include <arm_math.h>
 
 #include <asm_max.h>
+#include <math.h>
 
 float f10_array[10] = {48.21, 79.48, 24.27, 28.82, 78.24, 88.49, 31.19, 5.52, 82.70, 77.73};
 
@@ -26,9 +27,12 @@ int main() {
 	
 	int i;
 	
+	//variables for dot product and variance
 	float dot = 0;
 	int length = 5;
 	int j;
+	float mean=0; 
+	float var = 0;
 	
 	/* LOOP TO FIND MAX*/
 	max = f10_array[0];
@@ -72,13 +76,24 @@ int main() {
 	printf("C: DSP   : Max element f[%d] = %f\n", DSP_max_idx, DSP_max);
 	
 	
-//This portion of the code is the last section of the lab 
-	
+//This portion of the code is for the dot product
 	for(j = 0; j<length; j++){
 		 dot = dot + (arr1[j] * arr2[j]);
 	}
-	
-	printf("%f\n",dot);
+		printf("%f\n",dot);
 
+//This portion of the code is for the variance
+	for(j = 0; j<length; j++){  // compute the average first 
+		mean = mean + arr1[j];
+	}
+	mean = mean/length;
+	
+	for(j = 0; j<length; j++){  // compute the average first 
+		var = var + pow((arr1[j]-mean),2);
+	}
+	var = var/length;
+	
+	printf("%f\n", var);
+	
 	return 0;
 }
