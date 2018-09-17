@@ -91,9 +91,11 @@ int main() {
 	for(j = 0; j<length; j++){  // compute the average first 
 		var = var + pow((arr1[j]-mean),2);
 	}
-	var = var/length;
-	
+	var = var/length;	
 	printf("%f\n", var);
 	
+//CMSIS library variance
+	//arm_var_f32();
+	  
 	return 0;
 }
