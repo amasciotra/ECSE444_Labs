@@ -1,7 +1,10 @@
 #include <stdio.h>
 #include <arm_math.h>
 #include <asm_max.h>
+#include <dot_asm.h>
+#include <var_asm.h>
 #include <math.h>
+
 
 float f10_array[10] = {48.21, 79.48, 24.27, 28.82, 78.24, 88.49, 31.19, 5.52, 82.70, 77.73};
 
@@ -34,11 +37,13 @@ int main() {
 	//variables for dot product and variance
 	float dot = 0;
 	float dot2 = 0;
-	int length = 1000;
+	float dotasm = 0;
+	int length = 5;
 	int j;
 	float mean=0; 
 	float var = 0;
 	float var2 = 0;
+	float varasm = 0;
 	
 	/* LOOP TO FIND MAX*/
 	max = f10_array[0];
@@ -106,10 +111,22 @@ int main() {
 //CMSIS library dot product 
 	arm_dot_prod_f32(f1000_array, f1000_array2,length, &dot2);
 	
-	printf("%f\n",dot);
-	printf("%f\n",dot2);
-	printf("%f\n", var);
-	printf("%f\n",var2);
+//ARM implementation of the dot product 
+	dot_asm(f1000_array, f1000_array2 ,length, &dotasm);
+	
+//ARM Implementation of the variance
+	var_asm(arr1, length, &varasm);
+	
+	printf("Dot Product \n");
+	printf("Plane C: %f\n",dot);
+	printf("Library: %f\n",dot2);
+	printf("Assembly: %f\n",dotasm);
+	printf("Variance \n");
+	printf("Plane C: %f\n",var);
+	printf("Library: %f\n",var2);
+	printf("Assembly: %f\n",varasm);
+	
+	
 	
 	
 	return 0;

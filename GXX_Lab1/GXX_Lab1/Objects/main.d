@@ -9,3 +9,5 @@
 .\objects\main.o: C:\School Programs\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\objects\main.o: C:\School Programs\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
 .\objects\main.o: ./inc/asm_max.h
+.\objects\main.o: ./inc/dot_asm.h
+.\objects\main.o: ./inc/var_asm.h
