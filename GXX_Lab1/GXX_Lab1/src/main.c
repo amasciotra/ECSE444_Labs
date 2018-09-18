@@ -64,11 +64,15 @@ float findvar(float *f1000_array, int M){
 		float dpsum;		//for assembly dot product
 		float libdot;		//for library dot product
 		float libvar;		//for library variance
+		//float asmvar;		//for assembly variance
+		
 		asm_dotproduct(f1000_array, f1000_array2, N, &dpsum);
 		
 		arm_dot_prod_f32(f1000_array, f1000_array2, N, &libdot);	//library for dotprod
 		
 		arm_var_f32(f1000_array, N, &libvar); //library for variance
+		
+		//asm_var(f1000_array, N, &asmvar);
 
 
 

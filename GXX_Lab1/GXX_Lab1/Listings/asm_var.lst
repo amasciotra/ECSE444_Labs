@@ -1,0 +1,85 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000                 AREA             test, CODE, READONLY
+    2 00000000         
+    3 00000000                 export           asm_var     ; label must be exp
+                                                            orted if it is to b
+                                                            e used as a functio
+                                                            n in C
+    4 00000000         asm_var
+    5 00000000         
+    6 00000000 B470            PUSH             {R4, R5, R6}
+    7 00000002         
+    8 00000002 ED90 0A00       VLDR.f32         S0, [R0]
+    9 00000006 F04F 0500       MOV              R5, #0
+   10 0000000A EE01 5A10       VMOV.f32         S2, R5      ;temp sum for mean 
+                                                            setting to zero 
+   11 0000000E F04F 0600       MOV              R6, #0
+   12 00000012         
+   13 00000012         loop
+   14 00000012 F106 0601       ADD              R6, R6, #1  ;counter
+   15 00000016 42B1            CMP              R1, R6
+   16 00000018 DB06            BLT              done        ;exit condition
+   17 0000001A EB00 0486       ADD              R4, R0, R6, LSL #2 ;index for n
+                                                            ext item in both ar
+                                                            rays
+   18 0000001E EE30 1A01       VADD.f32         S2, S0, S2
+   19 00000022 ED94 0A00       VLDR.f32         S0, [R4]
+   20 00000026 E7F4            B                loop
+   21 00000028         
+   22 00000028         done
+   23 00000028 ED82 1A00       VSTR.f32         S2, [R2]
+   24 0000002C BC70            POP{R4,          R5, R6}
+   25 0000002E 4770            BX               LR
+   26 00000030         
+   27 00000030                 END
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp --apcs=int
+erwork --depend=.\objects\asm_var.d -o.\objects\asm_var.o -IC:\444\ECSE444_Labs
+\GXX_Lab1\GXX_Lab1\RTE -IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include -IC:
+\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\Device\ARM\ARMCM4\Include --predefine="__EVAL
+ SETA 1" --predefine="__UVISION_VERSION SETA 515" --predefine="_RTE_ SETA 1" --
+predefine="ARMCM4_FP SETA 1" --list=.\listings\asm_var.lst asm\asm_var.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+asm_var 00000000
+
+Symbol: asm_var
+   Definitions
+      At line 4 in file asm\asm_var.s
+   Uses
+      At line 3 in file asm\asm_var.s
+Comment: asm_var used once
+done 00000028
+
+Symbol: done
+   Definitions
+      At line 22 in file asm\asm_var.s
+   Uses
+      At line 16 in file asm\asm_var.s
+Comment: done used once
+loop 00000012
+
+Symbol: loop
+   Definitions
+      At line 13 in file asm\asm_var.s
+   Uses
+      At line 20 in file asm\asm_var.s
+Comment: loop used once
+test 00000000
+
+Symbol: test
+   Definitions
+      At line 1 in file asm\asm_var.s
+   Uses
+      None
+Comment: test unused
+4 symbols
+339 symbols in table
