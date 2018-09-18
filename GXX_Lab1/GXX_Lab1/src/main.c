@@ -1,13 +1,14 @@
 #include <stdio.h>
 #include <arm_math.h>
 
-//#include <asm_max.h>
+#include <asm_max.h>
+#include <asm_dotproduct.h>
 
 float f10_array[10] = {48.21, 79.48, 24.27, 28.82, 78.24, 88.49, 31.19, 5.52, 82.70, 77.73};
 
 
-float A[5] = {1, 2, 3, 4, 5};
-float B[5] = {5, 4, 3, 2, 1};
+float A[5] = {1.5, 2.5, 3.3, 4.4, 5.5};
+float B[5] = {5.2, 4.3, 3.3, 2.1, 1.5};
 int N = sizeof(A) / sizeof(A[0]) ;
 int M = sizeof(A) / sizeof(A[0]) ;
 
@@ -61,9 +62,25 @@ float findvar(float *A, int M){
 }
 	
 	int main() {
-		printf("%f\n\n", dotproduct(A, B, N));
-		printf("%f\n\n", findvar(A, M));
 	
+	
+		
+		float dpsum;		//for assembly dot product
+		//float libdot;		//for library dot product
+		asm_dotproduct(A, B, N, &dpsum);
+		
+//void arm_dot_prod_f32(float32_t *A, float32_t *B, uint32_t N, float32_t *libdot);
+
+
+
+
+
+		printf("%f\n\n", dotproduct(A, B, N));
+		
+		printf("%f\n", dpsum);
+		//printf("%f\n\n", libdot);
+		printf("%f\n\n", findvar(A, M));
+		
 		
 	
 //	float max;

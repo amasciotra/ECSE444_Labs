@@ -1,0 +1,87 @@
+
+
+
+ARM Macro Assembler    Page 1 
+
+
+    1 00000000                 AREA             test, CODE, READONLY
+    2 00000000         
+    3 00000000                 export           asm_dotproduct ; label must be 
+                                                            exported if it is t
+                                                            o be used as a func
+                                                            tion in C
+    4 00000000         asm_dotproduct
+    5 00000000         
+    6 00000000 B430            PUSH             {R4, R5}
+    7 00000002         
+    8 00000002 ED90 0A00       VLDR.f32         S0, [R0]
+    9 00000006 EDD1 0A00       VLDR.f32         S1, [R1]
+   10 0000000A         ;MOV R5, #0
+   11 0000000A         ;VMOV.f32 S2, [R5]       ;temp sum setting to zero
+   12 0000000A         
+   13 0000000A         loop
+   14 0000000A 1E52            SUBS             R2, R2, #1  ;counter
+   15 0000000C DB0A            BLT              done        ;exit condition
+   16 0000000E EB00 0482       ADD              R4, R0, R2, LSL #2 ;index for n
+                                                            ext item in both ar
+                                                            rays
+   17 00000012 EB01 0582       ADD              R5, R1, R2, LSL #2
+   18 00000016 EE00 1A20       VMLA.f32         S2, S0, S1  ;mul S0 * S1 then a
+                                                            dd S2 and store S2
+   19 0000001A ED94 0A00       VLDR.f32         S0, [R4]
+   20 0000001E EDD5 0A00       VLDR.f32         S1, [R5]
+   21 00000022 E7F2            B                loop
+   22 00000024         
+   23 00000024         done
+   24 00000024 ED83 1A00       VSTR.f32         S2, [R3]
+   25 00000028 BC30            POP{R4,          R5}
+   26 0000002A 4770            BX               LR
+   27 0000002C         
+   28 0000002C                 END
+Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp --apcs=int
+erwork --depend=.\objects\asm_dotproduct.d -o.\objects\asm_dotproduct.o -I.\RTE
+\_GXX_Lab1 -IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\Core\Include -IC:\Keil_v
+5\ARM\PACK\ARM\CMSIS\5.4.0\CMSIS\DSP\Include -IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.
+4.0\Device\ARM\ARMCM4\Include --predefine="__EVAL SETA 1" --predefine="__UVISIO
+N_VERSION SETA 526" --predefine="_RTE_ SETA 1" --predefine="ARMCM4_FP SETA 1" -
+-list=.\listings\asm_dotproduct.lst asm\asm_dotproduct.s
+
+
+
+ARM Macro Assembler    Page 1 Alphabetic symbol ordering
+Relocatable symbols
+
+asm_dotproduct 00000000
+
+Symbol: asm_dotproduct
+   Definitions
+      At line 4 in file asm\asm_dotproduct.s
+   Uses
+      At line 3 in file asm\asm_dotproduct.s
+Comment: asm_dotproduct used once
+done 00000024
+
+Symbol: done
+   Definitions
+      At line 23 in file asm\asm_dotproduct.s
+   Uses
+      At line 15 in file asm\asm_dotproduct.s
+Comment: done used once
+loop 0000000A
+
+Symbol: loop
+   Definitions
+      At line 13 in file asm\asm_dotproduct.s
+   Uses
+      At line 21 in file asm\asm_dotproduct.s
+Comment: loop used once
+test 00000000
+
+Symbol: test
+   Definitions
+      At line 1 in file asm\asm_dotproduct.s
+   Uses
+      None
+Comment: test unused
+4 symbols
+339 symbols in table
