@@ -134,11 +134,11 @@
             <RunIndependent>0</RunIndependent>
             <UpdateFlashBeforeDebugging>1</UpdateFlashBeforeDebugging>
             <Capability>1</Capability>
-            <DriverSelection>-1</DriverSelection>
+            <DriverSelection>4096</DriverSelection>
           </Flash1>
           <bUseTDR>1</bUseTDR>
           <Flash2>BIN\UL2CM3.DLL</Flash2>
-          <Flash3></Flash3>
+          <Flash3>"" ()</Flash3>
           <Flash4></Flash4>
           <pFcarmOut></pFcarmOut>
           <pFcarmGrp></pFcarmGrp>
@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>ARM_MATH_CM4 __FPU_PRESENT</Define>
               <Undefine></Undefine>
-              <IncludePath>./inc</IncludePath>
+              <IncludePath>./inc; /RTE</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -396,6 +396,26 @@
               <FileName>asm_max.s</FileName>
               <FileType>2</FileType>
               <FilePath>.\asm\asm_max.s</FilePath>
+            </File>
+            <File>
+              <FileName>asm_dotproduct.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\asm\asm_dotproduct.s</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>inc</GroupName>
+          <Files>
+            <File>
+              <FileName>asm_max.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\inc\asm_max.h</FilePath>
+            </File>
+            <File>
+              <FileName>asm_dotproduct.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\inc\asm_dotproduct.h</FilePath>
             </File>
           </Files>
         </Group>
