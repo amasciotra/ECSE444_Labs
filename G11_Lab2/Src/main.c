@@ -25,13 +25,45 @@ int main(void)
 
 	
 	/* Turn on LED */
-	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, GPIO_PIN_SET  );
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, GPIO_PIN_RESET);//setting off
+	HAL_DAC_Start(&hdac1,DAC_CHANNEL_1);
+	HAL_DAC_Start(&hdac1, DAC_CHANNEL_2);
 	
+	int i=0;
+	float datainput = 0.0; //analog to digital increment
   /* Infinite loop */
   while (1)
   {
-		//********** Student code here *************//
-  }
+//		if(HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_13)== 0){
+//			
+//			HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, GPIO_PIN_SET);
+//			
+//				}else{ HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, GPIO_PIN_RESET);
+//	
+//				}
+	
+				if(i == 255){
+					datainput = 0; 
+					i = 0;
+				}
+				HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_1,DAC_ALIGN_8B_R,datainput);
+				datainput = (i * 3.6) /255;
+			i++;
+			
+		
+		
+		
+		
+	
+	//********** Student code here *************//
+			}
+	
+			
+			
+			
+			
+			
+			
 }
 
 /**
@@ -160,6 +192,7 @@ void _Error_Handler(char *file, int line)
   /* User can add his own implementation to report the HAL error return state */
   while(1)
   {
+		
   }
 }
 
