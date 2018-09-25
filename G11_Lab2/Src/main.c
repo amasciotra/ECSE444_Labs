@@ -46,24 +46,13 @@ int main(void)
 					datainput = 0; 
 					i = 0;
 				}
-				HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_1,DAC_ALIGN_8B_R,datainput);
+				HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_1,DAC_ALIGN_8B_R,i);  //we want to write i in the channel 
+				HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_2,DAC_ALIGN_8B_R,i);
 				datainput = (i * 3.6) /255;
 			i++;
 			
-		
-		
-		
-		
-	
 	//********** Student code here *************//
-			}
-	
-			
-			
-			
-			
-			
-			
+			}	
 }
 
 /**
