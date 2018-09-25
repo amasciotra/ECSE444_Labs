@@ -29,27 +29,27 @@ int main(void)
 	HAL_DAC_Start(&hdac1,DAC_CHANNEL_1);
 	HAL_DAC_Start(&hdac1, DAC_CHANNEL_2);
 	
-	int i=0;
-	float datainput = 0.0; //analog to digital increment
+	int i=0; //iterating variable for DAC
+
   /* Infinite loop */
   while (1)
   {
-//		if(HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_13)== 0){
+//		if(HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_13)== 0){  //if the button is pressed
 //			
-//			HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, GPIO_PIN_SET);
-//			
-//				}else{ HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, GPIO_PIN_RESET);
-//	
-//				}
+//			HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, GPIO_PIN_SET);  //turn on the LED
+//		}
+//		else{ //turn off the LED 
+//		
+//		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, GPIO_PIN_RESET);
+//		}
 	
-				if(i == 255){
-					datainput = 0; 
+				if(i == 255){   //means we've reached the max we can output using 8 bits 
 					i = 0;
 				}
+				
 				HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_1,DAC_ALIGN_8B_R,i);  //we want to write i in the channel 
 				HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_2,DAC_ALIGN_8B_R,i);
-				datainput = (i * 3.6) /255;
-			i++;
+			  i++;
 			
 	//********** Student code here *************//
 			}	
