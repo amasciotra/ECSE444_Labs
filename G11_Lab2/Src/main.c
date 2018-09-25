@@ -27,29 +27,34 @@ int main(void)
 	/* Turn on LED */
 	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, GPIO_PIN_RESET);//setting off
 	HAL_DAC_Start(&hdac1,DAC_CHANNEL_1);
-	HAL_DAC_Start(&hdac1, DAC_CHANNEL_2);
 	
 	int i=0; //iterating variable for DAC
 
   /* Infinite loop */
   while (1)
   {
-//		if(HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_13)== 0){  //if the button is pressed
-//			
-//			HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, GPIO_PIN_SET);  //turn on the LED
-//		}
-//		else{ //turn off the LED 
-//		
-//		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, GPIO_PIN_RESET);
-//		}
+		if(HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_13)== 0){  //if the button is pressed
+			
+			HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, GPIO_PIN_SET);  //turn on the LED
+		}
+		else{ //turn off the LED 
+		
+		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, GPIO_PIN_RESET);
+		}
 	
+		
+		//for sawtooth channel 1, D7
 				if(i == 255){   //means we've reached the max we can output using 8 bits 
 					i = 0;
 				}
-				
+				i++;
+		
 				HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_1,DAC_ALIGN_8B_R,i);  //we want to write i in the channel 
-				HAL_DAC_SetValue(&hdac1, DAC_CHANNEL_2,DAC_ALIGN_8B_R,i);
-			  i++;
+			
+		
+				//for triangle wave channel 2, D13
+				HAL_DAC_Start(&hdac1,DAC_CHANNEL_2);
+		    HAL_DACEx_TriangleWaveGenerate(&hdac1,DAC_CHANNEL_2,DAC_TRIANGLEAMPLITUDE_4095);
 			
 	//********** Student code here *************//
 			}	
