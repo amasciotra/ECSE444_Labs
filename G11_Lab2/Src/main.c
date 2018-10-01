@@ -54,7 +54,7 @@ int main(void)
 		
 				//for triangle wave channel 2, D13
 				HAL_DAC_Start(&hdac1,DAC_CHANNEL_2);
-		    HAL_DACEx_TriangleWaveGenerate(&hdac1,DAC_CHANNEL_2,DAC_TRIANGLEAMPLITUDE_4095);
+		    HAL_DACEx_TriangleWaveGenerate(&hdac1,DAC_CHANNEL_2,4095);
 			
 	//********** Student code here *************//
 			}	
