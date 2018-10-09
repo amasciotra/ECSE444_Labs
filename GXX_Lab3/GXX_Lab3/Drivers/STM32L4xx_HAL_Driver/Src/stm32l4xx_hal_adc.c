@@ -2718,6 +2718,7 @@ HAL_StatusTypeDef HAL_ADC_ConfigChannel(ADC_HandleTypeDef* hadc, ADC_ChannelConf
         ( (sConfig->Channel == ADC_CHANNEL_VREFINT)    &&
           ((LL_ADC_GetCommonPathInternalCh(__LL_ADC_COMMON_INSTANCE(hadc->Instance)) & LL_ADC_PATH_INTERNAL_VREFINT) == 0U))
        )
+
     {
       /* Configuration of common ADC parameters (continuation)                */
 

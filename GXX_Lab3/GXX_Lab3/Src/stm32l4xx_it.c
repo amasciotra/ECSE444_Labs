@@ -36,7 +36,7 @@
 #include "stm32l4xx_it.h"
 
 /* USER CODE BEGIN 0 */
-
+extern int flag;
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
@@ -176,7 +176,7 @@ void PendSV_Handler(void)
 void SysTick_Handler(void)
 {
   /* USER CODE BEGIN SysTick_IRQn 0 */
-
+  //flag = 1;
   /* USER CODE END SysTick_IRQn 0 */
   HAL_IncTick();
   HAL_SYSTICK_IRQHandler();

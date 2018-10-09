@@ -1,6 +1,10 @@
 #include "main.h"
 #include "stm32l4xx_hal.h"
 
+
+int t;
+int flag = 0; //set to 1 if there is an interrupt from systick 
+
 ADC_HandleTypeDef hadc1;
 UART_HandleTypeDef huart1;
 DMA_HandleTypeDef hdma_usart1_tx;
@@ -8,10 +12,33 @@ DMA_HandleTypeDef hdma_usart1_tx;
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_USART1_UART_Init(void);
+static void MX_ADC_Init(void);
+
+//Function to print a tring from the UART 
+int UART_Print_String(UART_HandleTypeDef *huart, char chprint[], int Size){
+  char temp[1] = {'\n'};
+	if(HAL_UART_Receive(&huart1, (uint8_t *) &chprint[0], Size, 30000) == HAL_OK){
+		HAL_UART_Transmit(&huart1, (uint8_t *)&chprint[0], Size, 30000);
+		HAL_UART_Transmit(&huart1, (uint8_t *)&temp[0], 1, 30000);
+	}
+	else{
+		return 0;
+	}
+	return 1;
+}
+
+
 
 int main(void)
 {
-	char ch[5] = {'j','o','b','s','\n'};
+	char ch[100];
+	int temptens;
+	int tempones;
+  char sixteen; 
+	char seventeen;
+	
+	//char ch2[1] = {'y'};
+	char temperature[18] = {'T','E','M','P','E','R','A','T','U','R','E',' ','=',' '};
 
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
   HAL_Init();
@@ -21,15 +48,40 @@ int main(void)
   MX_GPIO_Init();
   MX_USART1_UART_Init();
 
+	//initialize temp channel 
+	MX_ADC_Init();
+  
   /* Infinite loop */
   while (1)
   {
+    //HAL_Delay(100);
+		//UART_Print_String(&huart1,&ch[0], 5);
+		
+		if(flag == 1){
+			flag = 0;
+		HAL_ADC_Start(&hadc1);
+		if(HAL_ADC_PollForConversion(&hadc1, 30000)== HAL_OK){
+		t =  HAL_ADC_GetValue(&hadc1);
+	  t = __HAL_ADC_CALC_TEMPERATURE(3300,t, LL_ADC_RESOLUTION_12B);
 
-		HAL_Delay(100);
-		HAL_UART_Transmit(&huart1, (uint8_t *)&ch[0], 5, 30000);
-
+		temptens = (t/10);
+		tempones = t-(temptens*10); 
+		sixteen = temptens + '0';
+		seventeen = tempones + '0';
+		temperature[14] = sixteen;
+		temperature[15] = seventeen;
+		temperature[16] = 'C';
+		temperature[17] = '\n';
+		HAL_UART_Transmit(&huart1, (uint8_t *)&temperature[0], 18, 3000);
+		}
+		HAL_ADC_Stop(&hadc1);
+	}
   }
 }
+
+
+
+
 
 void SystemClock_Config(void)
 {
@@ -94,7 +146,7 @@ void SystemClock_Config(void)
 
     /**Configure the Systick interrupt time 
     */
-  HAL_SYSTICK_Config(HAL_RCC_GetHCLKFreq()/1000);
+  HAL_SYSTICK_Config(HAL_RCC_GetHCLKFreq()/10);  //divide by 10 because we want to count up to 8 000 000 
 
     /**Configure the Systick 
     */
@@ -127,6 +179,7 @@ static void MX_USART1_UART_Init(void)
 static void MX_GPIO_Init(void)
 {
   __HAL_RCC_GPIOB_CLK_ENABLE();
+
 }
 
 
@@ -136,6 +189,50 @@ void _Error_Handler(char *file, int line)
   /* User can add his own implementation to report the HAL error return state */
   while(1)
   {
+  }
+}
+
+static void MX_ADC_Init(void){
+	
+	ADC_MultiModeTypeDef multimode;
+	ADC_ChannelConfTypeDef sConfig;
+	
+	__HAL_RCC_ADC_CLK_ENABLE();
+	
+
+	hadc1.Instance = ADC1;
+	hadc1.Init.ClockPrescaler = ADC_CLOCK_SYNC_PCLK_DIV2;
+  hadc1.Init.Resolution = ADC_RESOLUTION_12B;
+	hadc1.Init.DataAlign = ADC_DATAALIGN_RIGHT;
+	hadc1.Init.EOCSelection = ADC_EOC_SINGLE_CONV;
+	hadc1.Init.NbrOfConversion = 1;
+  hadc1.Init.ScanConvMode = ADC_SCAN_DISABLE;
+  hadc1.Init.ContinuousConvMode = DISABLE;
+  hadc1.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_NONE;
+  hadc1.Init.ExternalTrigConv = ADC_SOFTWARE_START;
+  hadc1.Init.DMAContinuousRequests = DISABLE;
+	hadc1.Init.Overrun = ADC_OVR_DATA_PRESERVED;
+	hadc1.Init.OversamplingMode = DISABLE;
+	
+	if(HAL_ADC_Init(&hadc1) != HAL_OK){
+    _Error_Handler(__FILE__, __LINE__);
+  }
+	multimode.Mode = ADC_MODE_INDEPENDENT;
+	if(HAL_ADCEx_MultiModeConfigChannel(&hadc1, &multimode) !=HAL_OK){
+		 _Error_Handler(__FILE__, __LINE__);
+	}
+	
+	
+ sConfig.Channel = ADC_CHANNEL_TEMPSENSOR;
+ sConfig.Rank = ADC_REGULAR_RANK_1;
+ sConfig.SamplingTime = ADC_SAMPLETIME_12CYCLES_5;
+ sConfig.SingleDiff = ADC_SINGLE_ENDED;
+	sConfig.OffsetNumber = ADC_OFFSET_NONE;
+ sConfig.Offset = 0;
+
+	if(HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK)
+  {
+    _Error_Handler(__FILE__, __LINE__);
   }
 }
 
