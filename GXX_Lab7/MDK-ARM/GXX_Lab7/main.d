@@ -55,3 +55,15 @@ gxx_lab7\main.o: ../Drivers/B-L475E-IOT01/Inc/stm32l475e_iot01.h
 gxx_lab7\main.o: ../Drivers/B-L475E-IOT01/Inc/../Components/lsm6dsl/lsm6dsl.h
 gxx_lab7\main.o: ../Drivers/B-L475E-IOT01/Inc/../Components/lsm6dsl/../Common/accelero.h
 gxx_lab7\main.o: ../Drivers/B-L475E-IOT01/Inc/../Components/lsm6dsl/../Common/gyro.h
+gxx_lab7\main.o: ../Drivers/B-L475E-IOT01/Inc/stm32l475e_iot01_gyro.h
+gxx_lab7\main.o: ../Drivers/B-L475E-IOT01/Inc/stm32l475e_iot01_tsensor.h
+gxx_lab7\main.o: ../Drivers/B-L475E-IOT01/Inc/../Components/hts221/hts221.h
+gxx_lab7\main.o: ../Drivers/B-L475E-IOT01/Inc/../Components/hts221/../Common/hsensor.h
+gxx_lab7\main.o: ../Drivers/B-L475E-IOT01/Inc/../Components/hts221/../Common/tsensor.h
+gxx_lab7\main.o: ../Drivers/B-L475E-IOT01/Inc/stm32l475e_iot01_hsensor.h
+gxx_lab7\main.o: ../Drivers/B-L475E-IOT01/Inc/stm32l475e_iot01_magneto.h
+gxx_lab7\main.o: ../Drivers/B-L475E-IOT01/Inc/../Components/lis3mdl/lis3mdl.h
+gxx_lab7\main.o: ../Drivers/B-L475E-IOT01/Inc/../Components/lis3mdl/../Common/magneto.h
+gxx_lab7\main.o: ../Drivers/B-L475E-IOT01/Inc/stm32l475e_iot01_psensor.h
+gxx_lab7\main.o: ../Drivers/B-L475E-IOT01/Inc/../Components/lps22hb/lps22hb.h
+gxx_lab7\main.o: ../Drivers/B-L475E-IOT01/Inc/../Components/lps22hb/../Common/psensor.h

@@ -52,13 +52,23 @@
 #include "cmsis_os.h"
 
 #include "stm32l475e_iot01_accelero.h"
+#include "stm32l475e_iot01_gyro.h"
+
+#include "stm32l475e_iot01_tsensor.h"
+#include "stm32l475e_iot01_hsensor.h"
+
+#include "stm32l475e_iot01_magneto.h"
+
+#include "stm32l475e_iot01_psensor.h"
+
 
 /* USER CODE BEGIN Includes */
 
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
-osThreadId defaultTaskHandle;
+osThreadId SensorTaskHandle;
+osThreadId ButtonTaskHandle;
 
 /* USER CODE BEGIN PV */
 /* Private variables ---------------------------------------------------------*/
@@ -107,7 +117,8 @@ void UART_init() {
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
-void StartDefaultTask(void const * argument);
+void StartSensorTask(void const * argument);
+void StartButtonTask(void const * argument);
 
 /* USER CODE BEGIN PFP */
 /* Private function prototypes -----------------------------------------------*/
@@ -164,12 +175,17 @@ int main(void)
 
   /* Create the thread(s) */
   /* definition and creation of defaultTask */
-  osThreadDef(defaultTask, StartDefaultTask, osPriorityNormal, 0, 128);
-  defaultTaskHandle = osThreadCreate(osThread(defaultTask), NULL);
+  osThreadDef(SensorTask, StartSensorTask, osPriorityNormal, 0, 128);
+  SensorTaskHandle = osThreadCreate(osThread(SensorTask), NULL);
+	
+	osThreadDef(ButtonTask, StartButtonTask, osPriorityNormal, 0, 128);
+  ButtonTaskHandle = osThreadCreate(osThread(ButtonTask), NULL);
 
   /* USER CODE BEGIN RTOS_THREADS */
+	
   /* add threads, ... */
   /* USER CODE END RTOS_THREADS */
+	
 
   /* USER CODE BEGIN RTOS_QUEUES */
   /* add queues, ... */
@@ -261,21 +277,72 @@ void SystemClock_Config(void)
 /* USER CODE END 4 */
 
 /* StartDefaultTask function */
-void StartDefaultTask(void const * argument)
+void StartSensorTask(void const * argument)
 {
 
-  /* USER CODE BEGIN 5 */
-	UART_init();
-	BSP_ACCELERO_Init();
-	int16_t XYZ[3];
-  /* Infinite loop */
+//  /* USER CODE BEGIN 5 */
+//	UART_init();
+//	BSP_ACCELERO_Init();
+//	BSP_GYRO_Init();
+//	int16_t XYZ[3];
+//	float XYZg [3];
+//  /* Infinite loop */
+//  for(;;)
+//  {
+//		osDelay(200);
+//		BSP_ACCELERO_AccGetXYZ(XYZ);
+//		BSP_GYRO_GetXYZ(XYZg);
+//		printf("ACCX = %d, ACCY = %d, ACCZ = %d\n,GYRX = %f, GYRY = %f, GYRZ = %f\n", XYZ[0], XYZ[1], XYZ[2], XYZg[0], XYZg[1],XYZg[2]);
+//  }
+//  /* USER CODE END 5 */ 
+	
+//	//sensor temperature and humidity
+//	float resulttemp = 0;
+//	float resulthumd = 0;
+//	
+//	UART_init();
+//	BSP_TSENSOR_Init();
+//	BSP_HSENSOR_Init();
+//	
+//	for(;;)
+//  {
+//		osDelay(200);
+//		resulttemp = BSP_TSENSOR_ReadTemp();
+//		resulthumd = BSP_HSENSOR_ReadHumidity();
+//		printf("Temperature = %f,Humidity = %f\n", resulttemp,resulthumd);
+//  }
+//	
+	
+	
+	//magnetometer sensor
+	
+//	UART_init();
+//	BSP_MAGNETO_Init();
+//	int16_t XYZm[3];
+
+//  /* Infinite loop */
+//  for(;;)
+//  {
+//		osDelay(200);
+//		BSP_MAGNETO_GetXYZ(XYZm);
+//		printf("MagX = %d, MagY = %d, MagZ = %d\n", XYZm[0], XYZm[1], XYZm[2]);
+//  }
+
+
+
+	//pressure sensor
+	
+		UART_init();
+		BSP_PSENSOR_Init();
+		float resultpres = 0; 
+
   for(;;)
   {
-		osDelay(100);
-		BSP_ACCELERO_AccGetXYZ(XYZ);
-		printf("X = %d, Y = %d, Z = %d\n", XYZ[0], XYZ[1], XYZ[2]);
-  }
-  /* USER CODE END 5 */ 
+		osDelay(200);
+		resultpres = BSP_PSENSOR_ReadPressure();
+		printf("Pressure = %f\n", resultpres); 
+	}
+	
 }
 
 /**

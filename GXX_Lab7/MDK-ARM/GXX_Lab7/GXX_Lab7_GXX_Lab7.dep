@@ -339,7 +339,7 @@ I (..\Drivers\B-L475E-IOT01\Components\lsm6dsl\lsm6dsl.h)(0x5B9FA1CB)
 I (..\Drivers\B-L475E-IOT01\Components\lsm6dsl\../Common/accelero.h)(0x5B9FA1CA)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x54C326B8)
 I (..\Drivers\B-L475E-IOT01\Components\lsm6dsl\../Common/gyro.h)(0x5B9FA1CA)
-F (../Src/main.c)(0x5BD45B64)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Drivers/CMSIS/Include -I../Drivers/B-L475E-IOT01/Inc -I..\Drivers\B-L475E-IOT01\Components\hts221 -I..\Drivers\B-L475E-IOT01\Components\lis3mdl -I..\Drivers\B-L475E-IOT01\Components\lps22hb -I..\Drivers\B-L475E-IOT01\Components\lsm6dsl -I..\Drivers\B-L475E-IOT01\Components\mx25r6435f -I..\Drivers\B-L475E-IOT01\Components\Common-I C:\ECSE444_Labs\GXX_Lab7\MDK-ARM\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32L4xx_DFP\2.0.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="515" -DSTM32L475xx -DUSE_HAL_DRIVER -DSTM32L475xx-o gxx_lab7\main.o --omf_browse gxx_lab7\main.crf --depend gxx_lab7\main.d)
+F (../Src/main.c)(0x5BD78D21)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Drivers/CMSIS/Include -I../Drivers/B-L475E-IOT01/Inc -I..\Drivers\B-L475E-IOT01\Components\hts221 -I..\Drivers\B-L475E-IOT01\Components\lis3mdl -I..\Drivers\B-L475E-IOT01\Components\lps22hb -I..\Drivers\B-L475E-IOT01\Components\lsm6dsl -I..\Drivers\B-L475E-IOT01\Components\mx25r6435f -I..\Drivers\B-L475E-IOT01\Components\Common-I C:\ECSE444_Labs\GXX_Lab7\MDK-ARM\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32L4xx_DFP\2.0.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="515" -DSTM32L475xx -DUSE_HAL_DRIVER -DSTM32L475xx-o gxx_lab7\main.o --omf_browse gxx_lab7\main.crf --depend gxx_lab7\main.d)
 I (../Inc/main.h)(0x5BD455AF)
 I (../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h)(0x5B9596FD)
 I (../Inc/stm32l4xx_hal_conf.h)(0x5BD45816)
@@ -378,7 +378,7 @@ I (../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart_ex.h)(0x5B9596FD)
 I (../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h)(0x5B959701)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h)(0x5B959701)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x54C326B8)
-I (../Inc/FreeRTOSConfig.h)(0x5BD455AF)
+I (../Inc/FreeRTOSConfig.h)(0x5BD78C5B)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h)(0x5B959701)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h)(0x5B959701)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/deprecated_definitions.h)(0x5B959701)
@@ -395,11 +395,23 @@ I (../Drivers/B-L475E-IOT01/Inc/stm32l475e_iot01.h)(0x5B9FA1C9)
 I (../Drivers/B-L475E-IOT01/Inc/../Components/lsm6dsl/lsm6dsl.h)(0x5B9FA1CB)
 I (../Drivers/B-L475E-IOT01/Inc/../Components/lsm6dsl/../Common/accelero.h)(0x5B9FA1CA)
 I (../Drivers/B-L475E-IOT01/Inc/../Components/lsm6dsl/../Common/gyro.h)(0x5B9FA1CA)
+I (../Drivers/B-L475E-IOT01/Inc/stm32l475e_iot01_gyro.h)(0x5B9FA1CA)
+I (../Drivers/B-L475E-IOT01/Inc/stm32l475e_iot01_tsensor.h)(0x5B9FA1CA)
+I (../Drivers/B-L475E-IOT01/Inc/../Components/hts221/hts221.h)(0x5B9FA1CA)
+I (../Drivers/B-L475E-IOT01/Inc/../Components/hts221/../Common/hsensor.h)(0x5B9FA1CA)
+I (../Drivers/B-L475E-IOT01/Inc/../Components/hts221/../Common/tsensor.h)(0x5B9FA1CA)
+I (../Drivers/B-L475E-IOT01/Inc/stm32l475e_iot01_hsensor.h)(0x5B9FA1CA)
+I (../Drivers/B-L475E-IOT01/Inc/stm32l475e_iot01_magneto.h)(0x5B9FA1CA)
+I (../Drivers/B-L475E-IOT01/Inc/../Components/lis3mdl/lis3mdl.h)(0x5B9FA1CA)
+I (../Drivers/B-L475E-IOT01/Inc/../Components/lis3mdl/../Common/magneto.h)(0x5B9FA1CA)
+I (../Drivers/B-L475E-IOT01/Inc/stm32l475e_iot01_psensor.h)(0x5B9FA1CA)
+I (../Drivers/B-L475E-IOT01/Inc/../Components/lps22hb/lps22hb.h)(0x5B9FA1CA)
+I (../Drivers/B-L475E-IOT01/Inc/../Components/lps22hb/../Common/psensor.h)(0x5B9FA1CA)
 F (../Src/freertos.c)(0x5BD455AF)(--c99 -c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I../Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Middlewares/Third_Party/FreeRTOS/Source/include -I../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I../Drivers/CMSIS/Include -I../Drivers/B-L475E-IOT01/Inc -I..\Drivers\B-L475E-IOT01\Components\hts221 -I..\Drivers\B-L475E-IOT01\Components\lis3mdl -I..\Drivers\B-L475E-IOT01\Components\lps22hb -I..\Drivers\B-L475E-IOT01\Components\lsm6dsl -I..\Drivers\B-L475E-IOT01\Components\mx25r6435f -I..\Drivers\B-L475E-IOT01\Components\Common-I C:\ECSE444_Labs\GXX_Lab7\MDK-ARM\RTE-I C:\Keil_v5\ARM\PACK\Keil\STM32L4xx_DFP\2.0.0\Drivers\CMSIS\Device\ST\STM32L4xx\Include-I C:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="515" -DSTM32L475xx -DUSE_HAL_DRIVER -DSTM32L475xx-o gxx_lab7\freertos.o --omf_browse gxx_lab7\freertos.crf --depend gxx_lab7\freertos.d)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h)(0x5B959701)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x54C326B8)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x54C326B8)
-I (../Inc/FreeRTOSConfig.h)(0x5BD455AF)
+I (../Inc/FreeRTOSConfig.h)(0x5BD78C5B)
 I (../Inc/main.h)(0x5BD455AF)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h)(0x5B959701)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h)(0x5B959701)
@@ -448,7 +460,7 @@ I (../Inc/stm32l4xx_it.h)(0x5BD455AF)
 I (../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h)(0x5B959701)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h)(0x5B959701)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x54C326B8)
-I (../Inc/FreeRTOSConfig.h)(0x5BD455AF)
+I (../Inc/FreeRTOSConfig.h)(0x5BD78C5B)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h)(0x5B959701)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h)(0x5B959701)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/deprecated_definitions.h)(0x5B959701)
@@ -1293,7 +1305,7 @@ I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x54C326B8)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h)(0x5B959701)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x54C326B8)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x54C326B8)
-I (../Inc/FreeRTOSConfig.h)(0x5BD455AF)
+I (../Inc/FreeRTOSConfig.h)(0x5BD78C5B)
 I (../Inc/main.h)(0x5BD455AF)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h)(0x5B959701)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h)(0x5B959701)
@@ -1306,7 +1318,7 @@ F (../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/port.c)(0x5
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h)(0x5B959701)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x54C326B8)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x54C326B8)
-I (../Inc/FreeRTOSConfig.h)(0x5BD455AF)
+I (../Inc/FreeRTOSConfig.h)(0x5BD78C5B)
 I (../Inc/main.h)(0x5BD455AF)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h)(0x5B959701)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h)(0x5B959701)
@@ -1319,7 +1331,7 @@ F (../Middlewares/Third_Party/FreeRTOS/Source/croutine.c)(0x5B959701)(--c99 -c -
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h)(0x5B959701)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x54C326B8)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x54C326B8)
-I (../Inc/FreeRTOSConfig.h)(0x5BD455AF)
+I (../Inc/FreeRTOSConfig.h)(0x5BD78C5B)
 I (../Inc/main.h)(0x5BD455AF)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h)(0x5B959701)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h)(0x5B959701)
@@ -1334,7 +1346,7 @@ I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x54C326B8)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h)(0x5B959701)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x54C326B8)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x54C326B8)
-I (../Inc/FreeRTOSConfig.h)(0x5BD455AF)
+I (../Inc/FreeRTOSConfig.h)(0x5BD78C5B)
 I (../Inc/main.h)(0x5BD455AF)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h)(0x5B959701)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h)(0x5B959701)
@@ -1350,7 +1362,7 @@ I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x54C326B8)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h)(0x5B959701)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x54C326B8)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x54C326B8)
-I (../Inc/FreeRTOSConfig.h)(0x5BD455AF)
+I (../Inc/FreeRTOSConfig.h)(0x5BD78C5B)
 I (../Inc/main.h)(0x5BD455AF)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h)(0x5B959701)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h)(0x5B959701)
@@ -1364,7 +1376,7 @@ I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x54C326B8)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h)(0x5B959701)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x54C326B8)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x54C326B8)
-I (../Inc/FreeRTOSConfig.h)(0x5BD455AF)
+I (../Inc/FreeRTOSConfig.h)(0x5BD78C5B)
 I (../Inc/main.h)(0x5BD455AF)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h)(0x5B959701)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h)(0x5B959701)
@@ -1380,7 +1392,7 @@ I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x54C326B8)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h)(0x5B959701)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x54C326B8)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x54C326B8)
-I (../Inc/FreeRTOSConfig.h)(0x5BD455AF)
+I (../Inc/FreeRTOSConfig.h)(0x5BD78C5B)
 I (../Inc/main.h)(0x5BD455AF)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h)(0x5B959701)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h)(0x5B959701)
@@ -1396,7 +1408,7 @@ I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x54C326B8)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h)(0x5B959701)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x54C326B8)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x54C326B8)
-I (../Inc/FreeRTOSConfig.h)(0x5BD455AF)
+I (../Inc/FreeRTOSConfig.h)(0x5BD78C5B)
 I (../Inc/main.h)(0x5BD455AF)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h)(0x5B959701)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h)(0x5B959701)
@@ -1413,7 +1425,7 @@ I (../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h)(0x5B959701)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h)(0x5B959701)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x54C326B8)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x54C326B8)
-I (../Inc/FreeRTOSConfig.h)(0x5BD455AF)
+I (../Inc/FreeRTOSConfig.h)(0x5BD78C5B)
 I (../Inc/main.h)(0x5BD455AF)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h)(0x5B959701)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h)(0x5B959701)
