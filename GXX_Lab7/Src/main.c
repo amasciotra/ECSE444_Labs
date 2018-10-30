@@ -63,11 +63,14 @@
 
 
 /* USER CODE BEGIN Includes */
+int s_status =2;
+
+
 
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
-//osThreadId SensorTaskHandle;
+osThreadId SensorTaskHandle;
 osThreadId ButtonTaskHandle;
 
 /* USER CODE BEGIN PV */
@@ -119,7 +122,7 @@ void UART_init() {
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
-//void StartSensorTask(void const * argument);
+void StartSensorTask(void const * argument);
 void StartButtonTask(void const * argument);
 
 /* USER CODE BEGIN PFP */
@@ -153,6 +156,7 @@ int main(void)
 
   /* Configure the system clock */
   SystemClock_Config();
+	
 
   /* USER CODE BEGIN SysInit */
 
@@ -177,11 +181,15 @@ int main(void)
 
   /* Create the thread(s) */
   /* definition and creation of defaultTask */
-//  osThreadDef(SensorTask, StartSensorTask, osPriorityNormal, 0, 128);
-//  SensorTaskHandle = osThreadCreate(osThread(SensorTask), NULL);
 	
 	osThreadDef(ButtonTask, StartButtonTask, osPriorityNormal, 0, 128);
-  ButtonTaskHandle = osThreadCreate(osThread(ButtonTask), NULL);
+	ButtonTaskHandle = osThreadCreate(osThread(ButtonTask), NULL);
+	
+	
+  osThreadDef(SensorTask, StartSensorTask, osPriorityNormal, 0, 128);
+  SensorTaskHandle = osThreadCreate(osThread(SensorTask), NULL);
+//	
+
 
   /* USER CODE BEGIN RTOS_THREADS */
 	
@@ -205,7 +213,7 @@ int main(void)
   {
 
   /* USER CODE END WHILE */
-
+	
   /* USER CODE BEGIN 3 */
 
   }
@@ -279,92 +287,106 @@ void SystemClock_Config(void)
 /* USER CODE END 4 */
 
 /* StartDefaultTask function */
-//void StartSensorTask(void const * argument)
-//{
+void StartSensorTask(void const * argument)
+{
 
-////  /* USER CODE BEGIN 5 */
-////	UART_init();
-////	BSP_ACCELERO_Init();
-////	BSP_GYRO_Init();
-////	int16_t XYZ[3];
-////	float XYZg [3];
-////  /* Infinite loop */
-////  for(;;)
-////  {
-////		osDelay(200);
-////		BSP_ACCELERO_AccGetXYZ(XYZ);
-////		BSP_GYRO_GetXYZ(XYZg);
-////		printf("ACCX = %d, ACCY = %d, ACCZ = %d\n,GYRX = %f, GYRY = %f, GYRZ = %f\n", XYZ[0], XYZ[1], XYZ[2], XYZg[0], XYZg[1],XYZg[2]);
-////  }
-////  /* USER CODE END 5 */ 
-//	
-////	//sensor temperature and humidity
-////	float resulttemp = 0;
-////	float resulthumd = 0;
-////	
-////	UART_init();
-////	BSP_TSENSOR_Init();
-////	BSP_HSENSOR_Init();
-////	
-////	for(;;)
-////  {
-////		osDelay(200);
-////		resulttemp = BSP_TSENSOR_ReadTemp();
-////		resulthumd = BSP_HSENSOR_ReadHumidity();
-////		printf("Temperature = %f,Humidity = %f\n", resulttemp,resulthumd);
-////  }
-////	
-//	
-//	
-//	//magnetometer sensor
-//	
-////	UART_init();
-////	BSP_MAGNETO_Init();
-////	int16_t XYZm[3];
+  /* USER CODE BEGIN 5 */
+	
+	if(s_status == 0){
+	UART_init();
+	BSP_ACCELERO_Init();
+	BSP_GYRO_Init();
+	int16_t XYZ[3];
+	float XYZg [3];
+  /* Infinite loop */
+	
+  for(;;)
+  {
+		osDelay(200);
+		BSP_ACCELERO_AccGetXYZ(XYZ);
+		BSP_GYRO_GetXYZ(XYZg);
+		printf("ACCX = %d, ACCY = %d, ACCZ = %d\n,GYRX = %f, GYRY = %f, GYRZ = %f\n", XYZ[0], XYZ[1], XYZ[2], XYZg[0], XYZg[1],XYZg[2]);
+  }
+	
+}
+  /* USER CODE END 5 */ 
+	
+if(s_status == 1){
+	//sensor temperature and humidity
+	float resulttemp = 0;
+	float resulthumd = 0;
+	
+	UART_init();
+	BSP_TSENSOR_Init();
+	BSP_HSENSOR_Init();
+	
+	for(;;)
+  {
+		osDelay(200);
+		resulttemp = BSP_TSENSOR_ReadTemp();
+		resulthumd = BSP_HSENSOR_ReadHumidity();
+		printf("Temperature = %f,Humidity = %f\n", resulttemp,resulthumd);
+  }
+	
+}
+	
+	if(s_status == 2){
+	//magnetometer sensor
+	
+	UART_init();
+	BSP_MAGNETO_Init();
+	int16_t XYZm[3];
 
-////  /* Infinite loop */
-////  for(;;)
-////  {
-////		osDelay(200);
-////		BSP_MAGNETO_GetXYZ(XYZm);
-////		printf("MagX = %d, MagY = %d, MagZ = %d\n", XYZm[0], XYZm[1], XYZm[2]);
-////  }
+  /* Infinite loop */
+  for(;;)
+  {
+		osDelay(200);
+		BSP_MAGNETO_GetXYZ(XYZm);
+		printf("MagX = %d, MagY = %d, MagZ = %d\n", XYZm[0], XYZm[1], XYZm[2]);
+	
+ }
 
+}
 
+	if(s_status == 3){
+	//pressure sensor
+	
+		UART_init();
+		BSP_PSENSOR_Init();
+		float resultpres = 0; 
 
-//	//pressure sensor
-//	
-//		UART_init();
-//		BSP_PSENSOR_Init();
-//		float resultpres = 0; 
-
-//  for(;;)
-//  {
-//		osDelay(200);
-//		resultpres = BSP_PSENSOR_ReadPressure();
-//		printf("Pressure = %f\n", resultpres); 
-//	}
-//	
-//}
-
+  for(;;)
+  {
+		osDelay(200);
+		resultpres = BSP_PSENSOR_ReadPressure();
+		printf("Pressure = %f\n", resultpres); 
+	}
+	
+}
+}
 
 
 void StartButtonTask(void const * argument)
 {
+	MX_GPIO_Init();
+	
+	
 	
 	/* Turn on LED */
-	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, GPIO_PIN_SET);//setting off
+	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, GPIO_PIN_RESET);//setting off
 	
-	
+	for(;;){
 	if(HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_13)== 0){  //if the button is pressed
 			
 			HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, GPIO_PIN_SET);  //turn on the LED
+			s_status = (s_status +1)%4; 
+		
 		}
 		else{ //turn off the LED 
 		
 		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, GPIO_PIN_RESET);
 		}
-	
+	}
 	
 }
 /**
