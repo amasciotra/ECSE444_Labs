@@ -1,7 +1,7 @@
 gxx_lab7\port.o: ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/port.c
 gxx_lab7\port.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
-gxx_lab7\port.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
-gxx_lab7\port.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+gxx_lab7\port.o: C:\School Programs\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+gxx_lab7\port.o: C:\School Programs\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 gxx_lab7\port.o: ../Inc/FreeRTOSConfig.h
 gxx_lab7\port.o: ../Inc/main.h
 gxx_lab7\port.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h

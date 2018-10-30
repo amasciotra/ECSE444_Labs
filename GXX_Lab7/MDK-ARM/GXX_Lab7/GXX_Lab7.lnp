@@ -1,4 +1,4 @@
---cpu Cortex-M4.fp --branchpatch=sdcomp-29491-629360
+--cpu=Cortex-M4.fp --branchpatch=sdcomp-29491-629360
 "gxx_lab7\startup_stm32l475xx.o"
 "gxx_lab7\stm32l475e_iot01.o"
 "gxx_lab7\stm32l475e_iot01_accelero.o"
@@ -48,6 +48,6 @@
 "gxx_lab7\timers.o"
 "gxx_lab7\cmsis_os.o"
 --library_type=microlib --strict --scatter "GXX_Lab7\GXX_Lab7.sct"
---summary_stderr --info summarysizes --map --xref --callgraph --symbols
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
 --list "GXX_Lab7.map" -o GXX_Lab7\GXX_Lab7.axf

@@ -1,8 +1,8 @@
 gxx_lab7\heap_4.o: ../Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c
-gxx_lab7\heap_4.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+gxx_lab7\heap_4.o: C:\School Programs\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 gxx_lab7\heap_4.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
-gxx_lab7\heap_4.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
-gxx_lab7\heap_4.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+gxx_lab7\heap_4.o: C:\School Programs\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+gxx_lab7\heap_4.o: C:\School Programs\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 gxx_lab7\heap_4.o: ../Inc/FreeRTOSConfig.h
 gxx_lab7\heap_4.o: ../Inc/main.h
 gxx_lab7\heap_4.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h

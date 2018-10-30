@@ -64,7 +64,7 @@
 
 /* USER CODE BEGIN Includes */
 int s_status =2;
-
+int a; //semaphore value 
 
 
 /* USER CODE END Includes */
@@ -72,6 +72,10 @@ int s_status =2;
 /* Private variables ---------------------------------------------------------*/
 osThreadId SensorTaskHandle;
 osThreadId ButtonTaskHandle;
+
+//create semaphore 
+osSemaphoreDef (semaphore);    // Declare semaphore
+osSemaphoreId (semaphore_id);
 
 /* USER CODE BEGIN PV */
 /* Private variables ---------------------------------------------------------*/
@@ -188,6 +192,10 @@ int main(void)
 	
   osThreadDef(SensorTask, StartSensorTask, osPriorityNormal, 0, 128);
   SensorTaskHandle = osThreadCreate(osThread(SensorTask), NULL);
+	
+	semaphore_id = osSemaphoreCreate(osSemaphore(semaphore), 2); // create a semaphore of 2 tokens
+
+	
 //	
 
 
@@ -370,6 +378,7 @@ void StartButtonTask(void const * argument)
 {
 	MX_GPIO_Init();
 	
+ a = osSemaphoreWait (semaphore_id, osWaitForever);
 	
 	
 	/* Turn on LED */
@@ -380,12 +389,13 @@ void StartButtonTask(void const * argument)
 			
 			HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, GPIO_PIN_SET);  //turn on the LED
 			s_status = (s_status +1)%4; 
-		
 		}
 		else{ //turn off the LED 
 		
 		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, GPIO_PIN_RESET);
 		}
+		
+		osSemaphoreRelease (semaphore_id);
 	}
 	
 }

@@ -1,9 +1,9 @@
 gxx_lab7\tasks.o: ../Middlewares/Third_Party/FreeRTOS/Source/tasks.c
-gxx_lab7\tasks.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
-gxx_lab7\tasks.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+gxx_lab7\tasks.o: C:\School Programs\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+gxx_lab7\tasks.o: C:\School Programs\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 gxx_lab7\tasks.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
-gxx_lab7\tasks.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
-gxx_lab7\tasks.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+gxx_lab7\tasks.o: C:\School Programs\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+gxx_lab7\tasks.o: C:\School Programs\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 gxx_lab7\tasks.o: ../Inc/FreeRTOSConfig.h
 gxx_lab7\tasks.o: ../Inc/main.h
 gxx_lab7\tasks.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
