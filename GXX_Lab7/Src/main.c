@@ -50,6 +50,7 @@
 #include "main.h"
 #include "stm32l4xx_hal.h"
 #include "cmsis_os.h"
+#include <string.h>
 
 #include "stm32l475e_iot01_accelero.h"
 #include "stm32l475e_iot01_gyro.h"
@@ -63,19 +64,27 @@
 
 
 /* USER CODE BEGIN Includes */
-int s_status =2;
-int a; //semaphore value 
 
+int s_status =0; //counter for the sensors 
+int32_t a; //semaphore value 
+char buffer[100];
+int flag = 0;  // flag for the systic interrupt 
+int sleep = 0; // 0 = not sleeping 
+int time = 0; // counter for the timer 
 
 /* USER CODE END Includes */
 
 /* Private variables ---------------------------------------------------------*/
 osThreadId SensorTaskHandle;
 osThreadId ButtonTaskHandle;
+osThreadId UsartTaskHandle;
 
 //create semaphore 
-osSemaphoreDef (semaphore);    // Declare semaphore
-osSemaphoreId (semaphore_id);
+osSemaphoreId my_semaphore_id;
+osSemaphoreDef(my_semaphore);
+osSemaphoreId my_semaphore_sens;
+osSemaphoreId my_semaphore_trans;
+//#define osFeature_Semaphore;
 
 /* USER CODE BEGIN PV */
 /* Private variables ---------------------------------------------------------*/
@@ -128,6 +137,7 @@ void UART_init() {
 void SystemClock_Config(void);
 void StartSensorTask(void const * argument);
 void StartButtonTask(void const * argument);
+void StartUsartTask(void const * argument);
 
 /* USER CODE BEGIN PFP */
 /* Private function prototypes -----------------------------------------------*/
@@ -143,8 +153,7 @@ void StartButtonTask(void const * argument);
   *
   * @retval None
   */
-int main(void)
-{
+int main(void){
   /* USER CODE BEGIN 1 */
 
   /* USER CODE END 1 */
@@ -177,6 +186,8 @@ int main(void)
 
   /* USER CODE BEGIN RTOS_SEMAPHORES */
   /* add semaphores, ... */
+    // Declare semaphore
+	
   /* USER CODE END RTOS_SEMAPHORES */
 
   /* USER CODE BEGIN RTOS_TIMERS */
@@ -186,14 +197,18 @@ int main(void)
   /* Create the thread(s) */
   /* definition and creation of defaultTask */
 	
+	//button thread
 	osThreadDef(ButtonTask, StartButtonTask, osPriorityNormal, 0, 128);
 	ButtonTaskHandle = osThreadCreate(osThread(ButtonTask), NULL);
 	
-	
+	//Sensor thread
   osThreadDef(SensorTask, StartSensorTask, osPriorityNormal, 0, 128);
   SensorTaskHandle = osThreadCreate(osThread(SensorTask), NULL);
 	
-	semaphore_id = osSemaphoreCreate(osSemaphore(semaphore), 2); // create a semaphore of 2 tokens
+	//USART thread
+	osThreadDef(UsartTask, StartUsartTask, osPriorityNormal, 0, 128);
+	UsartTaskHandle = osThreadCreate(osThread(UsartTask), NULL);
+
 
 	
 //	
@@ -297,107 +312,170 @@ void SystemClock_Config(void)
 /* StartDefaultTask function */
 void StartSensorTask(void const * argument)
 {
+	
+	
 
+for(;;){
+	
+	a = osSemaphoreWait(my_semaphore_sens, osWaitForever);
   /* USER CODE BEGIN 5 */
-	
-	if(s_status == 0){
-	UART_init();
-	BSP_ACCELERO_Init();
-	BSP_GYRO_Init();
-	int16_t XYZ[3];
-	float XYZg [3];
-  /* Infinite loop */
-	
-  for(;;)
-  {
-		osDelay(200);
-		BSP_ACCELERO_AccGetXYZ(XYZ);
-		BSP_GYRO_GetXYZ(XYZg);
-		printf("ACCX = %d, ACCY = %d, ACCZ = %d\n,GYRX = %f, GYRY = %f, GYRZ = %f\n", XYZ[0], XYZ[1], XYZ[2], XYZg[0], XYZg[1],XYZg[2]);
-  }
-	
-}
-  /* USER CODE END 5 */ 
-	
-if(s_status == 1){
-	//sensor temperature and humidity
-	float resulttemp = 0;
-	float resulthumd = 0;
-	
-	UART_init();
-	BSP_TSENSOR_Init();
-	BSP_HSENSOR_Init();
-	
-	for(;;)
-  {
-		osDelay(200);
-		resulttemp = BSP_TSENSOR_ReadTemp();
-		resulthumd = BSP_HSENSOR_ReadHumidity();
-		printf("Temperature = %f,Humidity = %f\n", resulttemp,resulthumd);
-  }
-	
-}
-	
-	if(s_status == 2){
-	//magnetometer sensor
-	
-	UART_init();
-	BSP_MAGNETO_Init();
-	int16_t XYZm[3];
+	if (a == 0){
+		
+			// deinit for power optimization 
+			BSP_MAGNETO_DeInit();	
+			BSP_ACCELERO_DeInit();	
+			BSP_GYRO_DeInit();	
+		
+		if(s_status == 0){
+			BSP_ACCELERO_Init();
+			BSP_GYRO_Init();
+			int16_t XYZ[3];
+			float XYZg [3];
 
-  /* Infinite loop */
-  for(;;)
-  {
-		osDelay(200);
-		BSP_MAGNETO_GetXYZ(XYZm);
-		printf("MagX = %d, MagY = %d, MagZ = %d\n", XYZm[0], XYZm[1], XYZm[2]);
+			osDelay(200);
+			BSP_ACCELERO_AccGetXYZ(XYZ);
+			BSP_GYRO_GetXYZ(XYZg);
+			sprintf(buffer,"ACCX = %d, ACCY = %d, ACCZ = %d\n,GYRX = %f, GYRY = %f, GYRZ = %f\n", XYZ[0], XYZ[1], XYZ[2], XYZg[0], XYZg[1],XYZg[2]);
+			osSemaphoreRelease(my_semaphore_trans);
+		}
+
 	
- }
+		if(s_status == 1){
+				//sensor temperature and humidity
+				float resulttemp = 0;
+				float resulthumd = 0;
+				
 
-}
-
-	if(s_status == 3){
-	//pressure sensor
+				BSP_TSENSOR_Init();
+				BSP_HSENSOR_Init();
+				
 	
-		UART_init();
-		BSP_PSENSOR_Init();
-		float resultpres = 0; 
+				osDelay(200);
+				resulttemp = BSP_TSENSOR_ReadTemp();
+				resulthumd = BSP_HSENSOR_ReadHumidity();
+				sprintf(buffer,"Temperature = %f,Humidity = %f\n", resulttemp,resulthumd);
+				osSemaphoreRelease(my_semaphore_trans);
+			
+		}
+	
+		if(s_status == 2){
+				//magnetometer sensor
+				
+				BSP_MAGNETO_Init();
+				int16_t XYZm[3];
 
-  for(;;)
-  {
-		osDelay(200);
-		resultpres = BSP_PSENSOR_ReadPressure();
-		printf("Pressure = %f\n", resultpres); 
+				osDelay(200);
+				BSP_MAGNETO_GetXYZ(XYZm);
+				sprintf(buffer,"MagX = %d, MagY = %d, MagZ = %d\n", XYZm[0], XYZm[1], XYZm[2]);
+				osSemaphoreRelease(my_semaphore_trans);
+				osThreadYield();
+		}
+
+		if(s_status == 3){
+				//pressure sensor
+			
+				BSP_PSENSOR_Init();
+				float resultpres = 0; 
+
+  
+				osDelay(200);
+				resultpres = BSP_PSENSOR_ReadPressure();
+				sprintf(buffer,"Pressure = %f\n", resultpres); 
+				osSemaphoreRelease(my_semaphore_trans);
+				//osSemaphoreDelete(my_semaphore_sens);
+				osThreadYield();
+		}
 	}
 	
 }
 }
-
 
 void StartButtonTask(void const * argument)
 {
 	MX_GPIO_Init();
-	
- a = osSemaphoreWait (semaphore_id, osWaitForever);
-	
-	
+	//my_semaphore = osSemaphoreCreate(osSemaphore(my_semaphore), 3); // create a semaphore of 3 tokens
+
 	/* Turn on LED */
 	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, GPIO_PIN_RESET);//setting off
+
+	//semaphores for the 3 threads
+  my_semaphore_id = osSemaphoreCreate(osSemaphore(my_semaphore), 1);    //semaphore of the button thread
+  my_semaphore_sens = osSemaphoreCreate(osSemaphore(my_semaphore), 1);  //semaphore of the sensors thread
+	my_semaphore_trans = osSemaphoreCreate(osSemaphore(my_semaphore), 1);  //semaphore of the uart thread
+  
+	//set the number of tokens available for the sensor and usart threads to 0 
+	osSemaphoreWait(my_semaphore_sens, osWaitForever);
+	osSemaphoreWait(my_semaphore_trans, osWaitForever);
 	
-	for(;;){
-	if(HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_13)== 0){  //if the button is pressed
+	for(;;){	
+		//check if a token of the button semaphore is available 
+		a = osSemaphoreWait(my_semaphore_id, osWaitForever);
+	
+		if(a == 0){	
+			if(HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_13)== 0 && sleep ==1){  //if the button is pressed
+			  sleep = 0; 	
+				time = 0;
+				//Sensor thread
+				osThreadDef(SensorTask, StartSensorTask, osPriorityNormal, 0, 128);
+				SensorTaskHandle = osThreadCreate(osThread(SensorTask), NULL);
 			
-			HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, GPIO_PIN_SET);  //turn on the LED
-			s_status = (s_status +1)%4; 
-		}
+				//USART thread
+				osThreadDef(UsartTask, StartUsartTask, osPriorityNormal, 0, 128);
+				UsartTaskHandle = osThreadCreate(osThread(UsartTask), NULL);
+			}
 		else{ //turn off the LED 
-		
-		HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, GPIO_PIN_RESET);
+			if(sleep ==1){
+			osSemaphoreRelease(my_semaphore_id);
+			}
 		}
 		
-		osSemaphoreRelease (semaphore_id);
+		if(HAL_GPIO_ReadPin(GPIOC,GPIO_PIN_13)== 0 && sleep ==0){  //if the button is pressed 
+				if(flag ==1){
+					 flag =0;
+					 time++;
+				 }
+				 if(time >7){
+						sleep = 1;		
+						BSP_MAGNETO_DeInit();	
+						BSP_ACCELERO_DeInit();	
+						BSP_GYRO_DeInit();					 
+					 osThreadTerminate(SensorTaskHandle);
+					 osThreadTerminate(UsartTaskHandle);
+					 
+					 osDelay(1000);
+					 osSemaphoreRelease(my_semaphore_id);
+				 }
+				 else{
+
+				 HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, GPIO_PIN_SET);  //turn on the LED
+				 osDelay(200);
+				 s_status = (s_status +1)%4; 
+				 osSemaphoreRelease(my_semaphore_sens);
+				 }
+			 
+			}
+			else{ //turn off the LED and reset time to 0
+			
+		  time = 0;
+			HAL_GPIO_WritePin(GPIOB, GPIO_PIN_14, GPIO_PIN_RESET);
+			osSemaphoreRelease(my_semaphore_sens);
+			
+			}
+		}
 	}
-	
+}
+
+void StartUsartTask(void const * argument)
+{
+	for(;;){
+	//check if the token of the usat semaphore is available 
+	a = osSemaphoreWait(my_semaphore_trans, osWaitForever);
+	UART_init();
+		if(a == 0){
+			printf("%s", buffer);
+			osSemaphoreRelease(my_semaphore_id);
+		}
+	}
 }
 /**
   * @brief  Period elapsed callback in non blocking mode

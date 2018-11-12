@@ -50,6 +50,7 @@ gxx_lab7\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h
 gxx_lab7\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h
 gxx_lab7\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
 gxx_lab7\main.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
+gxx_lab7\main.o: C:\School Programs\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 gxx_lab7\main.o: ../Drivers/B-L475E-IOT01/Inc/stm32l475e_iot01_accelero.h
 gxx_lab7\main.o: ../Drivers/B-L475E-IOT01/Inc/stm32l475e_iot01.h
 gxx_lab7\main.o: ../Drivers/B-L475E-IOT01/Inc/../Components/lsm6dsl/lsm6dsl.h

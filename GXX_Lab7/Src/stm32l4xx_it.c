@@ -37,7 +37,7 @@
 #include "cmsis_os.h"
 
 /* USER CODE BEGIN 0 */
-
+extern int flag;
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
@@ -156,7 +156,7 @@ void SysTick_Handler(void)
   /* USER CODE END SysTick_IRQn 0 */
   osSystickHandler();
   /* USER CODE BEGIN SysTick_IRQn 1 */
-
+	flag = 1;
   /* USER CODE END SysTick_IRQn 1 */
 }
 
