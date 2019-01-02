@@ -1,4 +1,5 @@
     AREA text, CODE, READONLY
+    //test
 	export mov_asm
 mov_asm 
 
